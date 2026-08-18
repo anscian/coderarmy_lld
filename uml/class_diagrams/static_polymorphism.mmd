@@ -1,0 +1,15 @@
+classDiagram
+  class ManualCar {
+    -brand: string
+    -model: string
+    -isEngineOn: bool
+    -currentSpeed: int
+    -currentGear: char
+
+    +startEngine(): void
+    +stopEngine(): void
+    +shiftGear(char gear): void
+    +accelerate(int speed): void
+    +accelerate(): void
+    +brake(): void
+  }
