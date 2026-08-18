@@ -1,0 +1,28 @@
+classDiagram
+  class Car {
+    #brand: string
+    #model: string
+    #isEngineOn: bool
+    #currentSpeed: int
+
+    +startEngine(): void
+    +accelerate(): void
+    +brake(): void
+    +stopEngine(): void
+  }
+
+  class ManualCar {
+    -currentGear: char
+
+    +shiftGear(char gear): void
+  }
+
+  class ElectricCar {
+    -batteryLevel: int
+
+    +chargeBattery(): void
+    +getBatteryLevel(): int
+  }
+
+  Car <|-- ManualCar
+  Car <|-- ElectricCar
