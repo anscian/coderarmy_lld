@@ -1,0 +1,22 @@
+classDiagram
+  %% one class one role
+  class Product {
+    price
+    name
+  }
+
+  class ShoppingCart {
+    calcTotalPrice()
+  }
+
+  class CartInvoicePrinter {
+    printInvoice()
+  }
+
+  class CartDBStorage {
+    saveToDB()
+  }
+
+  ShoppingCart "1" o-- "*" Product
+  CartInvoicePrinter --> ShoppingCart
+  CartDBStorage --> ShoppingCart

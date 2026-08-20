@@ -1,0 +1,13 @@
+classDiagram
+  %% multiple roles for one class
+  class Product {
+    price
+    name
+  }
+
+  class ShoppingCart {
+    calcTotalPrice()
+    printInvoice()
+    saveToDB()
+  }
+  ShoppingCart "1" o-- "*" Product
