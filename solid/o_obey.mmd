@@ -1,0 +1,33 @@
+classDiagram
+  %% feature integration uses abstraction
+  class Product {
+    price
+    name
+  }
+
+  class ShoppingCart {
+    calcTotalPrice()
+  }
+
+  class CartInvoicePrinter {
+    printInvoice()
+  }
+
+  class DBPersistence {
+    <<Abstract>>
+
+    save()
+  }
+
+  class saveToS3
+
+  class saveToMongo
+
+  class saveToSQL
+
+  ShoppingCart "1" o-- "*" Product
+  CartInvoicePrinter --> ShoppingCart
+  DBPersistence --> ShoppingCart
+  saveToSQL ..|> DBPersistence
+  saveToS3 ..|> DBPersistence
+  saveToMongo ..|> DBPersistence
