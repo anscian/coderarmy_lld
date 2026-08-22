@@ -1,0 +1,19 @@
+classDiagram
+  %% high level application class interacts directly with DB classes
+
+  %% calls save for each DB instace it has
+  class Application {
+    saveToMongo()
+    saveToSQL()
+  }
+
+  class MongoDB {
+    save()
+  }
+
+  class SQLDB {
+    save()
+  }
+
+  Application --> MongoDB
+  Application --> SQLDB

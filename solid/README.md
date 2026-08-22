@@ -26,3 +26,5 @@
 - client should not be forced to implement methods they don't need
 
 ## Dependency Inversion Principle (DIP)
+- high level module should not depend on low level module but rather both should depend on abstraction
+- "If OCP is the target, then DIP is the solution"

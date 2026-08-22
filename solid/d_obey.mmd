@@ -1,0 +1,19 @@
+classDiagram
+  %% high level application contact DB via Persistence
+
+  %% calls save method of general Persistence object
+  %% this application uses whatever Persistence object is passed into its contructor for save() call
+  class Application
+
+  class Persistence {
+    <<Abstract>>
+
+    save()
+  }
+
+  class MongoDB
+  class SQLDB
+
+  Application --> Persistence
+  Persistence <|.. SQLDB
+  Persistence <|.. MongoDB
