@@ -1,0 +1,22 @@
+classDiagram
+  %% Client expects withdraw to work based on interface
+  class Account {
+    <<Abstract>>
+
+    deposit()
+    withdraw()
+  }
+
+  class SavingsAcc
+
+  class JointAcc
+
+  %% FD raises error in withdrawl
+  class FDAcc
+
+  class Client
+
+  Client "1" o-- "*" Account
+  Account <|.. FDAcc
+  Account <|.. JointAcc
+  Account <|.. SavingsAcc

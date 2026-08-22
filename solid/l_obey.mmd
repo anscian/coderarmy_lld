@@ -1,0 +1,28 @@
+classDiagram
+  %% Subclasses always serves the interface promised to the Client
+  class NonWithdrawableAccount {
+    <<Abstract>>
+
+    deposit()
+  }
+  class WithdrawableAccount {
+    <<Abstract>>
+
+    withdraw()
+  }
+
+  class SavingsAcc
+
+  class JointAcc
+
+  %% FD raises error in withdrawl
+  class FDAcc
+
+  class Client
+
+  Client "1" o-- "*" NonWithdrawableAccount
+  Client "1" o-- "*" WithdrawableAccount
+  NonWithdrawableAccount <|.. FDAcc
+  NonWithdrawableAccount <|-- WithdrawableAccount
+  WithdrawableAccount <|.. JointAcc
+  WithdrawableAccount <|.. SavingsAcc
