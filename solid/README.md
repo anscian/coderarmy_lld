@@ -22,5 +22,7 @@
         - **Post-Condition**: If parent sets some post-conditions after its method, then the child should either enforce or strengthen the post-condition
 
 ## Interface Segregation Principle (ISP)
+- many client specific interfaces are better than one general purpose interface
+- client should not be forced to implement methods they don't need
 
 ## Dependency Inversion Principle (DIP)

@@ -1,0 +1,20 @@
+classDiagram
+  %% Only 3D figures truely overrides volume()
+  %% This also violates LSP as Square is not substitutable for Shape
+  class Shape {
+    <<Abstract>>
+
+    area()*
+    volume()*
+  }
+
+  %% volumne() throws exception
+  class Rectangle
+  class Square
+
+  %% volumne() defined
+  class Cube
+
+  Shape <|.. Rectangle
+  Shape <|.. Square
+  Shape <|.. Cube

@@ -1,0 +1,25 @@
+classDiagram
+  %% Multiple interfaces now doesn't force client to make unnecessary implementations
+  class 2DShape {
+    <<Abstract>>
+
+    area()*
+  }
+
+  class 3DShape {
+    <<Abstract>>
+
+    aread()*
+    volumne()*
+  }
+
+  %% volumne() need not be defined
+  class Rectangle
+  class Square
+
+  %% volumne() defined
+  class Cube
+
+  2DShape <|.. Rectangle
+  2DShape <|.. Square
+  3DShape <|.. Cube
