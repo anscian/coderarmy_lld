@@ -1,0 +1,14 @@
+classDiagram
+  class DocumentEditor {
+    -elements: vector<string>
+    -renderedDocument: string
+
+    +addText(string text): void
+    +addImage(string path): void
+    +renderDocument(): string
+    +saveToFile(): void
+  }
+
+  class Client
+
+  Client --> DocumentEditor
