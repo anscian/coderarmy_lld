@@ -1,0 +1,70 @@
+classDiagram
+  %% Iteration 2 subtly need knowledge of other class functionalities like render for each DocumentElement
+  %% This disobeys SRP indirectly
+  %% Usage of another DocumentRenderer class
+  %% Breaks Principle of Least Knowledge as DocumentRender would call render() for each DocumentElement
+  %% This is a tradeoff condition
+
+  class Client
+
+  class DocumentElement {
+    <<Abstract>>
+
+    +render()*: string
+  }
+
+  class TextElement
+  class ImageElement
+  class NewlineElement
+  class TabspaceElement
+
+  %% Model class is one that does CRUD operations on a data structure
+  class Document {
+    <<Model>>
+
+    +addElement(DocumentElement el): void
+    +getElements(): vector<DocumentElement>
+  }
+
+  class DocumentRenderer {
+    -renderedDocument: string
+
+    +renderDocument(): string
+  }
+
+  class Persistence {
+    <<Abstract>>
+
+    +save(string data)*: void
+  }
+
+  class FileStorage
+  class DBStorage
+
+  class DocumentEditor {
+    +addText(string text): void
+    +addImage(string path): void
+    +addTabspace(): void
+    +addNewline(): void
+  }
+
+  class DocumentSaver {
+    +saveDocument(): void
+  }
+
+  DocumentEditor --> Document
+  DocumentRenderer --> Document
+  DocumentSaver --> DocumentRenderer
+  Document "1" o-- "*" DocumentElement
+  DocumentElement <|.. TextElement
+  DocumentElement <|.. ImageElement
+  DocumentElement <|.. NewlineElement
+  DocumentElement <|.. TabspaceElement
+  DocumentSaver --> Persistence
+  Persistence <|.. FileStorage
+  Persistence <|.. DBStorage
+  Client --> Document
+  Client --> Persistence
+  Client --> DocumentEditor
+  Client --> DocumentRenderer
+  Client --> DocumentSaver
