@@ -1,0 +1,4 @@
+Hello, world!
+	Indented text
+[Image: image.png]
+End of document

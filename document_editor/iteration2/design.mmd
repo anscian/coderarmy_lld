@@ -1,0 +1,53 @@
+classDiagram
+  %% Now follows all SOLID design principles
+
+  class Client
+
+  class DocumentElement {
+    <<Abstract>>
+
+    +render()*: string
+  }
+
+  class TextElement
+  class ImageElement
+  class NewlineElement
+  class TabspaceElement
+
+  class Document {
+    +addElement(DocumentElement el): void
+    +render(): string
+  }
+
+  class Persistence {
+    <<Abstract>>
+
+    +save(string data)*: void
+  }
+
+  class FileStorage
+  class DBStorage
+
+  class DocumentEditor {
+    -renderedDocument: string
+
+    +addText(string text): void
+    +addImage(string path): void
+    +addTabspace(): void
+    +addNewline(): void
+    +renderDocument(): string
+    +saveDocument(): void
+  }
+
+  DocumentEditor --> Persistence
+  DocumentEditor --> Document
+  Document "1" o-- "*" DocumentElement
+  DocumentElement <|.. TextElement
+  DocumentElement <|.. ImageElement
+  DocumentElement <|.. NewlineElement
+  DocumentElement <|.. TabspaceElement
+  Persistence <|.. FileStorage
+  Persistence <|.. DBStorage
+  Client --> Document
+  Client --> Persistence
+  Client --> DocumentEditor
