@@ -1,0 +1,14 @@
+classDiagram
+  class Client {
+    +execute()
+  }
+
+  class Strategy {
+    <<Abstract>>
+    +run()*
+  }
+
+  class Strategy_i
+
+  Strategy_i ..|> Strategy
+  Client --> Strategy

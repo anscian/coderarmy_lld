@@ -1,0 +1,17 @@
+classDiagram
+  class Robot
+
+  class Talkable
+  class NonTalkable
+
+  class WalkableTalkable
+  class NonWalkableTalkable
+  class WalkableNonTalkable
+  class NonWalkableNonTalkable
+
+  Robot <|-- Talkable
+  Robot <|-- NonTalkable
+  Talkable <|-- WalkableTalkable
+  Talkable <|-- NonWalkableTalkable
+  NonTalkable <|-- WalkableNonTalkable
+  NonTalkable <|-- NonWalkableNonTalkable

@@ -1,0 +1,48 @@
+classDiagram
+  class Robot {
+    <<Abstract>>
+    +talk()
+    +walk()
+    +fly()
+    +projection()*
+  }
+
+  %% Separate family of algorithms
+  class Talkable {
+    <<Abstract>>
+    +talk()*
+  }
+
+  class Walkable {
+    <<Abstract>>
+    +walk()*
+  }
+
+  class Flyable {
+    <<Abstract>>
+    +fly()*
+  }
+
+  class NormalTalk
+  class NoTalk
+  class NormalWalk
+  class NoWalk
+  class NormalFly
+  class NoFly
+
+  class CompanionRobot
+
+  Robot --> Talkable
+  Robot --> Walkable
+  Robot --> Flyable
+  Talkable <|.. NormalTalk
+  Talkable <|.. NoTalk
+  Walkable <|.. NormalWalk
+  Walkable <|.. NoWalk
+  Flyable <|.. NormalFly
+  Flyable <|.. NoFly
+
+  CompanionRobot <|.. Robot
+  CompanionRobot --> NormalTalk
+  CompanionRobot --> NormalWalk
+  CompanionRobot --> NoFly
