@@ -1,0 +1,13 @@
+classDiagram
+  class Product {
+    <<Abstract>>
+  }
+
+  class Product_i
+
+  class Factory {
+    +createProduct(...): Product
+  }
+
+  Product <|.. Product_i
+  Factory --> Product
