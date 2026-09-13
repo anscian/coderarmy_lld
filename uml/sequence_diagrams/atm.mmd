@@ -1,7 +1,7 @@
 sequenceDiagram
   actor U as User
   participant ATM
-  participant T
+  participant T as Transaction
   participant A as Account
   participant C as Cash Dispenser
 
@@ -9,7 +9,6 @@ sequenceDiagram
   activate ATM
   U->>ATM : withdraw(account, amount)
 
-  create participant T as Transaction
   activate T
   ATM->>T : withdraw(account, amount)
 
@@ -18,27 +17,19 @@ sequenceDiagram
 
   alt account has balance
     A-->>T : return true
-    deactivate A
     T-->>ATM : return true
-    deactivate T
-    destroy T
-
     activate C
     ATM->>C : withdraw(account, amount)
     C-->>ATM : return amount
     deactivate C
-
     ATM-->>U : return amount
-
   else insufficient funds
     A-->>T : return false
-    deactivate A
     T-->>ATM : return false
-    deactivate T
-    destroy T
     ATM-->>U : raise insufficient balance
-
   end
 
+  deactivate T
+  deactivate A
   deactivate ATM
   deactivate U
