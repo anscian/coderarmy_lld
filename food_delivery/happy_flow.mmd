@@ -1,0 +1,59 @@
+sequenceDiagram
+  %% User centric (no delivery agent variant)
+  %% Order is one of Delivery or Pickup
+  %% Payment service assumed third-party
+
+  actor U as User
+  participant R as Restaurants
+  participant M as Menu
+  participant C as Cart
+  participant O as Order
+  participant DO as Delivery
+  participant PO as Pickup
+  participant P as Payment
+
+  activate U
+  activate R
+  U->>R : select restaurant
+  R-->>U : menu for selected restaurant
+
+  activate M
+  activate C
+  U-)M : select items
+  M--)C : add the items
+
+  deactivate M
+  deactivate R
+
+  activate O
+  U-)C : checkout
+  C--)O : place order
+  O->>U : delivery or takeaway
+
+  alt delivery order type
+    U-->>O : delivery
+    activate DO
+    activate P
+    O-)DO : delegated to delivery order
+    DO-)P : proceed to payment gateway
+  else takeaway order type
+    U-->>O : takeaway
+    activate PO
+    activate P
+    O-)PO : delegated to takeaway order
+    PO-)P : proceed to payment gateway
+  end
+
+  U-)P : complete transaction
+  P--)O : transaction status (success)
+  deactivate P
+
+  O--)U : order placed notification
+  O-)C : clear cart
+  deactivate C
+
+  U->>O : order received
+  O-->>U : Thank You and Rate us
+  deactivate O
+
+  deactivate U
