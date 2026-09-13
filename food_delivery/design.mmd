@@ -1,0 +1,114 @@
+classDiagram
+  class Restaurant {
+    <<Model>>
+    #id: int
+    #name: string
+    #address: string
+    #menu: vector<MenuItem>
+  }
+
+  class MenuItem {
+    <<Model>>
+    #code: int
+    #name: string
+    #description: string
+    #price: double
+  }
+
+  %% single poc for Restaurant object for loose coupling
+  class RestaurantManager {
+    <<Singleton>>
+    #restaurants: vector<Restaurant>
+    +addRestaurant(): Restaurant
+    +getRestaurant(string name): Restaurant
+    +searchRestaurant(string location): Restaurant
+    +updateRestaurant(Restaurant r): void
+    +removeRestaurant(Restaurant r): void
+  }
+
+  class User {
+    <<Model>>
+    #id: int
+    #name: string
+    #address: string
+    #cart: Cart
+  }
+
+  class Cart {
+    #r: Restaurant
+    #items: vector<MenuItem>
+    #total: double
+    +addToCart(MenuItem item): void
+    +clear(): void
+    +isEmpty(): bool
+  }
+
+  class PaymentStrategy {
+    <<Abstract>>
+    +pay()*: void
+  }
+
+  class NetBanking
+  class UPI
+  class CreditDebitCard
+
+  class Order {
+    <<Abstract>>
+    #id: int
+    #r: Restaurant
+    #user: User
+    #items: vector<MenuItem>
+    #ps: PaymentStrategy
+    +getType()*: string
+  }
+
+  class Delivery
+  class Pickup
+
+  class OrderFactory {
+    <<Abstract>>
+    +createOrder(string type)*: Order
+  }
+
+  class OrderNowFactory
+  class OrderScheduleFactory
+
+  class OrderManager {
+    <<Singleton>>
+    #orders: vector<Order>
+    +addOrder(Order o): void
+  }
+
+  class NotificationService {
+    +notify(Order o): void
+  }
+
+  class Backend {
+    <<Orchestrator>>
+  }
+
+  class Client
+
+  Restaurant "1" *-- "*" MenuItem
+  RestaurantManager "1" o-- "*" Restaurant
+  User "1" *-- "1" Cart
+  Cart --> Restaurant
+  Cart "1" o-- "*" MenuItem
+  PaymentStrategy <|.. NetBanking
+  PaymentStrategy <|.. UPI
+  PaymentStrategy <|.. CreditDebitCard
+  Order --> User
+  Order --> Restaurant
+  Order "1" o-- "*" MenuItem
+  Order --> PaymentStrategy
+  Order <|.. Delivery
+  Order <|.. Pickup
+  OrderFactory <|.. OrderNowFactory
+  OrderFactory <|.. OrderScheduleFactory
+  OrderNowFactory --> Delivery
+  OrderScheduleFactory --> Delivery
+  OrderNowFactory --> Pickup
+  OrderScheduleFactory --> Pickup
+  OrderManager "1" o-- "*" Order
+  NotificationService --> Order
+  Client --> Backend
